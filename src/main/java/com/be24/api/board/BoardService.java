@@ -3,8 +3,10 @@ package com.be24.api.board;
 import com.be24.api.board.model.BoardDto;
 
 public class BoardService {
-    public void createPost(BoardDto boardDto) {
+    // Controller에게 DTO 타입으로 반환
+    public BoardDto createPost(BoardDto boardDto) {
         BoardRepository boardRepository = new BoardRepository();
-        boardRepository.create(boardDto);
+        BoardDto returnDto = boardRepository.create(boardDto);
+        return returnDto;
     }
 }
