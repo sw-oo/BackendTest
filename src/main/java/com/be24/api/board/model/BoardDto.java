@@ -13,6 +13,9 @@ public class BoardDto {
         this.contents = contents;
     }
 
+    public BoardDto() {
+    }
+
     public static BoardDto toDto(HttpServletRequest req) {
         BoardDto boardDto = new BoardDto(
                 null,
