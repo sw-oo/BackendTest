@@ -19,9 +19,14 @@ public class BoardController implements Controller {
     }
     @Override
     public String process(HttpServletRequest req, HttpServletResponse resp) {
-        BoardDto dto = JsonParser.from(req, BoardDto.class);
+        if(req.getRequestURI().contains("create") && req.getMethod().equals("POST")) {
+            BoardDto dto = JsonParser.from(req, BoardDto.class);
+            BoardDto returnDto = boardService.createPost(dto);
+        } else if(req.getRequestURI().contains("read") && req.getMethod().equals("GET")) {
+            String boardIdx = req.getParameter("idx");
+            BoardDto returnDto = boardService.readPost(boardIdx);
+        }
 
-        BoardDto returnDto = boardService.createPost(dto);
         return "";
     }
 }

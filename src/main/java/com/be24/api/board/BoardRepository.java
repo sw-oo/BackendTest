@@ -31,4 +31,22 @@ public class BoardRepository {
             throw new RuntimeException(e);
         }
     }
+
+    public BoardDto read(String boardIdx) {
+        try {
+            Class.forName("org.mariadb.jdbc.Driver");
+            Connection conn = DriverManager.getConnection("jdbc:mariadb://10.10.10.100:3306/test", "root", "qwer1234");
+            try (Statement stmt = conn.createStatement()) {
+                ResultSet rs = stmt.executeQuery("SELECT * FROM board WHERE idx=" + boardIdx);
+                if (rs.next()) {
+                    return new BoardDto(
+                            rs.getInt("board.idx"),
+                            rs.getString("board.title"),
+                            rs.getString("board.contents"));
+                }            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        return null;
+    }
 }

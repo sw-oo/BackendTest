@@ -13,4 +13,9 @@ public class BoardService {
         BoardDto returnDto = boardRepository.create(boardDto);
         return returnDto;
     }
+
+    public BoardDto readPost(String boardIdx) {
+        BoardDto returnDto = boardRepository.read(boardIdx);
+        return returnDto;
+    }
 }
