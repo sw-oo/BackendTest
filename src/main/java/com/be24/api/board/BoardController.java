@@ -2,6 +2,7 @@ package com.be24.api.board;
 
 
 import com.be24.api.board.model.BoardDto;
+import com.be24.api.common.BaseResponse;
 import com.be24.api.common.Controller;
 import com.be24.api.utils.JsonParser;
 import jakarta.servlet.http.HttpServletRequest;
@@ -18,15 +19,18 @@ public class BoardController implements Controller {
         this.boardService = boardService;
     }
     @Override
-    public String process(HttpServletRequest req, HttpServletResponse resp) {
-        if(req.getRequestURI().contains("create") && req.getMethod().equals("POST")) {
+    public BaseResponse process(HttpServletRequest req, HttpServletResponse resp) {
+        BoardDto returnDto = null;
+
+        if (req.getRequestURI().contains("create") && req.getMethod().equals("POST")) {
             BoardDto dto = JsonParser.from(req, BoardDto.class);
-            BoardDto returnDto = boardService.createPost(dto);
-        } else if(req.getRequestURI().contains("read") && req.getMethod().equals("GET")) {
+            returnDto = boardService.createPost(dto);
+        } else if (req.getRequestURI().contains("read") && req.getMethod().equals("GET")) {
             String boardIdx = req.getParameter("idx");
-            BoardDto returnDto = boardService.readPost(boardIdx);
+            returnDto = boardService.readPost(boardIdx);
         }
 
-        return "";
+        return BaseResponse.success(returnDto);
     }
 }
+
