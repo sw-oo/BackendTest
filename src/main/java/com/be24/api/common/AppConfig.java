@@ -1,6 +1,9 @@
 package com.be24.api.common;
 
 import com.be24.api.board.*;
+import com.be24.api.image.ImageController;
+import com.be24.api.image.ImageRepository;
+import com.be24.api.image.ImageService;
 import com.be24.api.user.UserController;
 
 import java.util.HashMap;
@@ -17,6 +20,9 @@ public class AppConfig {
     private final BoardRepository boardRepository = new BoardCpRepositoryImpl(ds);
     private final BoardService boardService = new BoardService(boardRepository);
     private final BoardController boardController = new BoardController(boardService);
+    private final ImageRepository imageRepository = new ImageRepository();
+    private final ImageService imageService = new ImageService(imageRepository);
+    private final ImageController imageController = new ImageController(imageService);
     private final UserController userController = new UserController();
 
 
@@ -29,6 +35,7 @@ public class AppConfig {
 
         controllerMap.put("/board/create", boardController);
         controllerMap.put("/board/read", boardController);
+        controllerMap.put("/image/upload", imageController);
         controllerMap.put("/user/signup", userController);
         controllerMap.put("/user/login", userController);
     }
