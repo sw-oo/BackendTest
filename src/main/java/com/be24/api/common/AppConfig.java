@@ -1,6 +1,8 @@
 package com.be24.api.common;
 
 import com.be24.api.board.BoardController;
+import com.be24.api.board.BoardRepository;
+import com.be24.api.board.BoardService;
 import com.be24.api.user.UserController;
 
 import java.util.HashMap;
@@ -8,10 +10,12 @@ import java.util.Map;
 
 public class AppConfig {
     private final Map<String, Controller> controllerMap = new HashMap<>();
+    private final BoardRepository boardRepository = new BoardRepository();
+    private final BoardService boardService = new BoardService(boardRepository);
 
     // 처음 객체가 생성될 때 controllerMap에 uri를 키로 컨트롤러 객체를 값으로 저장
     public AppConfig() {
-        controllerMap.put("/board/register", new BoardController());
+        controllerMap.put("/board/create", new BoardController(boardService));
         controllerMap.put("/user/signup", new UserController());
     }
 

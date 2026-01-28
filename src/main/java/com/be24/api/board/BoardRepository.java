@@ -8,18 +8,6 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 
 public class BoardRepository {
-    // BoardRepository 클래스 싱글톤 디자인 패턴 적용
-    public BoardRepository() {
-    }
-
-    private static class SingletonHolder {
-        private static final BoardRepository instance = new BoardRepository();
-    }
-
-    public static BoardRepository getInstance() {
-        return BoardRepository.SingletonHolder.instance;
-    }
-
     // Service에게 DTO 타입으로 반환
     public BoardDto create(BoardDto boardDto) {
         try {
