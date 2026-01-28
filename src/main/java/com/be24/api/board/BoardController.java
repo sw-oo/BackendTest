@@ -19,8 +19,8 @@ public class BoardController extends HttpServlet {
         // 클라이언트가 전달한 요청 Deserialize -> DTO에 저장
         BoardDto boardDto = JsonParser.from(req, BoardDto.class);
 
-        // Service의 createPost메서드 호출
-        BoardService boardService = new BoardService();
+        // BoardService 싱글톤 인스턴스 반환
+        BoardService boardService = BoardService.getInstance();
 
         // 응답 DTO객체 생성 후 값 저장
         BoardDto returnDto = boardService.createPost(boardDto);
