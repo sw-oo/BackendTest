@@ -26,7 +26,7 @@ public class BoardController implements Controller {
             BoardDto dto = JsonParser.from(req, BoardDto.class);
             returnDto = boardService.createPost(dto);
         } else if (req.getRequestURI().contains("read") && req.getMethod().equals("GET")) {
-            String boardIdx = req.getParameter("idx");
+            String boardIdx= req.getParameter("idx");
             returnDto = boardService.readPost(boardIdx);
         }
 
